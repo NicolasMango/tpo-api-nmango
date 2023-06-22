@@ -15,7 +15,6 @@ export default class Header extends Component {
                             <li><a className='smoothscroll' href='#about'>About</a></li>
                             <li><a className='smoothscroll' href='#resume'>Resume</a></li>
                             <li><a className='smoothscroll' href='#portfolio'>Works</a></li>
-                            <li><a className='smoothscroll' href='#testimonials'>Testimonials</a></li>
                             <li><a className='smoothscroll' href='#contact'>Contact</a></li>
                             <li><Link to="/login" style={{ padding: "10px" }}> Login </Link> </li>
                         </ul>
