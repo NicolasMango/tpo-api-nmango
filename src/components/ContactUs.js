@@ -1,4 +1,5 @@
 import * as React from 'react';
+import postContact from '../api/postContact.api';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -7,6 +8,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
 const { Link } = require("react-router-dom");
 
 const darkTheme = createTheme({
@@ -16,19 +20,85 @@ const darkTheme = createTheme({
 });
 
 export default function ContactUs() {
-    const handleSubmit = (event) => {
+
+    const [values, setValues] = React.useState({
+        firstName: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const [snack, setSnack] = React.useState('');
+    const [showSuccess, setShowSuccess] = React.useState(false);
+    const [showWarning, setShowWarning] = React.useState(false);
+    const [showError, setShowError] = React.useState(false);
+
+    const handleNotShowSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setShowSuccess(false);
+    };
+
+    const handleNotShowWarning = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setShowWarning(false);
+    };
+
+    const handleNotShowError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setShowError(false);
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        await postContact(values.firstName, values.email, values.subject, values.message)
+            .then(response => response.json())
+            .catch(error => alert(error))
+            .then(response => {
+                //        if (response.status == 201) {
+                if (response.message === "Created!") {
+                    setShowSuccess(true);
+                    setSnack("Mensaje enviado , estaremos en contacto")
+                } else {
+                    if (response.message === 'Error in createUser Service') {
+                        //            if (response.status == 500) {
+                        setShowWarning(true);
+                        setSnack("Ops hubo un error")
+                    }
+                }
+            });
+
     };
 
     return (
         <section id='contact'>
             <ThemeProvider theme={darkTheme}>
                 <Container component="main" maxWidth="xs">
+                    <Snackbar open={showSuccess} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} autoHideDuration={6000} onClose={handleNotShowSuccess}>
+                        <Alert size="md" variant="filled" onClose={handleNotShowSuccess} severity="success" sx={{ width: '100%' }}>
+                        {snack}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={showWarning} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} TransitionComponent={Slide} autoHideDuration={6000} onClose={handleNotShowWarning}>
+                        <Alert size="sm" variant="filled" severity="warning" onClose={handleNotShowWarning} sx={{ width: '100%' }}>
+                            {snack}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={showError} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} TransitionComponent={Slide} autoHideDuration={6000} onClose={handleNotShowError}>
+                        <Alert size="lg" variant="filled" severity="error" onClose={handleNotShowError} sx={{ width: '100%' }}>
+                            {snack}
+                        </Alert>
+                    </Snackbar>
+
                     <CssBaseline />
                     <Box
                         sx={{
@@ -51,7 +121,8 @@ export default function ContactUs() {
                                         fullWidth
                                         id="firstName"
                                         label="Name"
-                                        
+                                        onChange={handleChange('firstName')}
+                                        value={values.firstName}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -62,25 +133,31 @@ export default function ContactUs() {
                                         label="Email"
                                         name="email"
                                         autoComplete="email"
+                                        onChange={handleChange('email')}
+                                        value={values.email}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth
-                                        id="email"
+                                        id="subject"
                                         label="Subject"
-                                        name="email"
-                                        autoComplete="email"
+                                        name="subject"
+                                        autoComplete="subject"
+                                        onChange={handleChange('subject')}
+                                        value={values.subject}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth
-                                        id="outlined-multiline-static"
-                                        label="Comentario"
+                                        id="message"
+                                        label="Message"
                                         multiline
                                         rows={4}
                                         defaultValue="Send me your opinion"
+                                        onChange={handleChange('message')}
+                                        value={values.message}
                                     />
                                 </Grid>
 
@@ -98,6 +175,6 @@ export default function ContactUs() {
                     <br></br>
                 </Container>
             </ThemeProvider>
-        </section>
+        </section >
     );
 }

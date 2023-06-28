@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 const { Link } = require("react-router-dom");
 
 export default class Header extends Component {
+
     render() {
+        const sessionloggedInUser = sessionStorage.getItem("authenticated");
         let resumeData = this.props.resumeData;
         return (
             <React.Fragment>
@@ -16,7 +18,12 @@ export default class Header extends Component {
                             <li><a className='smoothscroll' href='#resume'>Resume</a></li>
                             <li><a className='smoothscroll' href='#portfolio'>Works</a></li>
                             <li><a className='smoothscroll' href='#contact'>Contact</a></li>
-                            <li><Link to="/login" style={{ padding: "10px" }}> Login </Link> </li>
+                            <li>
+                                {sessionloggedInUser
+                                    ? <Link to="/dashboard" style={{ padding: "10px" }}> Dashboard </Link>
+                                    : <Link to="/login" style={{ padding: "10px" }}> Login </Link>
+                                }
+                            </li>
                         </ul>
                     </nav>
                     <div className='row banner'>
@@ -43,7 +50,7 @@ export default class Header extends Component {
                         <a className='smoothscroll' href='#about'><i className='icon-down-circle'></i></a>
                     </p>
                 </header>
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }

@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import signup from '../api/signup.api';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,13 +31,38 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const [values, setValues] = React.useState({
+    firstName : '',
+    lastName : '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    await signup(values.firstName,values.lastName, values.email, values.password)
+      .then(response => response.json())
+      .catch(error => alert(error))
+      .then(response => {
+//        if (response.status == 201) {
+        if (response.message === "Created!") {
+          alert("el usuario registrado correctamente")
+        } else {
+        if (response.message === 'Error in createUser Service') {
+//            if (response.status == 500) {
+            alert("el usuario ya está registrado con su email")
+          } else {
+            alert("Las credenciales son inválidas")
+          }
+        }
+      });
+
   };
 
   return (
@@ -56,7 +83,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -66,7 +93,9 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleChange('firstName')}
                   autoFocus
+                  value={values.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -76,7 +105,9 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  onChange={handleChange('lastName')}
                   autoComplete="family-name"
+                  value={values.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,7 +117,9 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleChange('email')}
                   autoComplete="email"
+                  value={values.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -97,7 +130,9 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handleChange('password')}
                   autoComplete="new-password"
+                  value={values.password}
                 />
               </Grid>
             </Grid>
@@ -118,6 +153,7 @@ export default function SignUp() {
                 <Button
                   type="submit"
                   fullWidth
+                  onClick={handleSubmit}
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >

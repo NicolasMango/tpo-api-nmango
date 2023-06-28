@@ -1,26 +1,37 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState  } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Divider, Avatar, Grid, Paper } from "@mui/material";
-
-const data = new Array(10).fill().map((value, index) => ({ id: index, author: "Nicolas Mango", title: 'Propuesta Laboral', body: 'Me contacto desde la compania de HR Evolution , estamos buascando candidatos para el puesto de developer sr en cobol' }))
+import getContacts from "../api/contactos.api";
 
 const imgLink =
     "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
-class Post extends Component {
+export default function Post() {
 
-    state = {
-        data: data
-    }
+    const [contacts, setContacts] = useState([]);
+    const [isCommentsEmpty, setCommentsIsEmpty] = useState([true]);
+    const accessToken = sessionStorage.getItem('access-token')
 
-    constructor(props) {
-        super(props)
+    useEffect(() => {
+         getContacts(accessToken)
+        .then(response => {
+            if (typeof response !='undefined' && response.length > 0) {
+                setCommentsIsEmpty(false);
+                setContacts(response);
+            } else {
+                setCommentsIsEmpty(true);
+            }
+          })
+          .catch(error =>  {
+            //setShowError(true);
+            //setSnack("Falla de sistema vuelva intentar en unos momentos");
+            console.log(error);
+          });
+    }, [setContacts,accessToken,isCommentsEmpty]);
 
-        this.deletePost = this.deletePost.bind(this);
-    }
 
-    deletePost = (dato) => {
+    /*deletePost = (dato) => {
         var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
         if (opcion == true) {
             var contador = 0;
@@ -34,44 +45,44 @@ class Post extends Component {
             this.setState({ data: arreglo });
         }
     };
+    */
 
-    render() {
-        return (
-            <div style={{ padding: 14 }} className="App">
-                <h1>Comments</h1>
-
-                {data.map(((item) => (
-                    <div key={item.id}>
-                        <Paper style={{ padding: "30px 20px", marginTop: 10 }}>
-                            <Grid xs={8} container wrap="nowrap" spacing={2}>
-                                <Grid justifyContent="left">
-                                    <IconButton  onClick={() => this.deletePost(item)} aria-label="delete">
-                                        {<DeleteIcon />}
-                                    </IconButton >
-                                </Grid>
-                                <Grid item> <Avatar alt="Remy Sharp" src={imgLink} /> </Grid>
-                                <Grid justifyContent="left" item xs zeroMinWidth>
-                                    <h3 style={{ margin: 0, textAlign: "left" }}> {item.author}
-                                    </h3>
-                                    <h4 style={{ margin: 0, textAlign: "left" }}> {item.title}</h4>
-                                    <p style={{ textAlign: "left" }}>
-                                        {item.body}
-                                    </p>
-                                    <p style={{ textAlign: "left", color: "gray" }}>
-                                        posted 1 minute ago
-                                    </p>
-
-                                </Grid>
-                                <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+    return (
+        <div style={{ padding: 14 }} className="App">
+            <h1>Comments</h1>
+            {isCommentsEmpty
+                ? <h2 style={{ margin: 0, textAlign: "center" , color:"white" }}> {"Sin mensajes"}  </h2>
+                : <h2 style={{ margin: 0, textAlign: "center" , color:"white" }}> {"Mensajes Disponibles"}  </h2>
+            }
+            {contacts.map(((item) => (
+                <div key={item._id}>
+                    <Paper style={{ padding: "30px 20px", marginTop: 10 }}>
+                        <Grid xs={8} container wrap="nowrap" spacing={2}>
+                            <Grid justifyContent="left">
+                                <IconButton onClick={() => "this.deletePost(item)"} aria-label="delete">
+                                    {<DeleteIcon />}
+                                </IconButton >
                             </Grid>
-                        </Paper>
-                    </div>
-                )))}
+                            <Grid item> <Avatar alt="Remy Sharp" src={imgLink} /> </Grid>
+                            <Grid justifyContent="left" item xs zeroMinWidth>
+                                <h3 style={{ margin: 0, textAlign: "left" }}> {item.firstname}  {item.lastname} ({item.email})
+                                </h3>
+                                <h5 style={{ margin: 0, textAlign: "left" }}> Asunto : {item.subject}</h5>
+                                <p style={{ textAlign: "left" }}>
+                                    {item.message}
+                                </p>
+                                <p style={{ textAlign: "left", color: "gray" }}>
+                                    posted 1 minute ago
+                                </p>
 
-            </div>
+                            </Grid>
+                            <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                        </Grid>
+                    </Paper>
+                </div>
+            )))}
 
-        );
-    }
+        </div>
+
+    );
 }
-
-export default Post;
