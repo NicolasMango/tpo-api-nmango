@@ -1,5 +1,5 @@
 import * as React from 'react';
-import postContact from '../api/postContact.api';
+import {postContact} from '../api/postContact.api';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -64,13 +64,11 @@ export default function ContactUs() {
             .then(response => response.json())
             .catch(error => alert(error))
             .then(response => {
-                //        if (response.status == 201) {
                 if (response.message === "Created!") {
                     setShowSuccess(true);
                     setSnack("Mensaje enviado , estaremos en contacto")
                 } else {
                     if (response.message === 'Error in createUser Service') {
-                        //            if (response.status == 500) {
                         setShowWarning(true);
                         setSnack("Ops hubo un error")
                     }

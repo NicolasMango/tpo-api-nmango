@@ -9,7 +9,6 @@ export default function Dashboard() {
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("authenticated");
     if (loggedInUser) {
-      console.log("autenticado :" + loggedInUser)
       setauthenticated(loggedInUser);
     }
   }, []);

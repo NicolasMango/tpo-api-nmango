@@ -3,6 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Divider, Avatar, Grid, Paper } from "@mui/material";
 import getContacts from "../api/contactos.api";
+import {DeleteContact} from "../api/postContact.api";
+
 
 const imgLink =
     "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
@@ -14,6 +16,7 @@ export default function Post() {
     const accessToken = sessionStorage.getItem('access-token')
 
     useEffect(() => {
+  
          getContacts(accessToken)
         .then(response => {
             if (typeof response !='undefined' && response.length > 0) {
@@ -31,21 +34,31 @@ export default function Post() {
     }, [setContacts,accessToken,isCommentsEmpty]);
 
 
-    /*deletePost = (dato) => {
-        var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
-        if (opcion == true) {
-            var contador = 0;
-            var arreglo = this.state.data;
-            arreglo.map((registro) => {
-                if (dato.id == registro.id) {
-                    arreglo.splice(contador, 1);
-                }
-                contador++;
-            });
-            this.setState({ data: arreglo });
+    const handleDelete = async (idComment) => {
+        console.log("pedido delete :" + idComment )
+        var opcion = window.confirm("¿Estás Seguro que deseas eliminar el comentario? ");
+        if (opcion === true) {
+            setContacts(
+				contacts.filter((item) => {
+					return item._id !== idComment;
+				})
+			);
+            DeleteContact(accessToken,idComment)
+            .then(response => {
+                console.log(response);
+              })
+              .catch(error =>  {
+                console.log(error);
+              });
+
+            if (typeof contacts !='undefined' && contacts.length > 0) {
+                setCommentsIsEmpty(false);
+            } else {
+                setCommentsIsEmpty(true);
+            }
         }
     };
-    */
+    
 
     return (
         <div style={{ padding: 14 }} className="App">
@@ -59,7 +72,7 @@ export default function Post() {
                     <Paper style={{ padding: "30px 20px", marginTop: 10 }}>
                         <Grid xs={8} container wrap="nowrap" spacing={2}>
                             <Grid justifyContent="left">
-                                <IconButton onClick={() => "this.deletePost(item)"} aria-label="delete">
+                                <IconButton onClick={() => handleDelete(item._id)} value={item._id} aria-label="delete">
                                     {<DeleteIcon />}
                                 </IconButton >
                             </Grid>
