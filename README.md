@@ -2,7 +2,7 @@
 
 Este es el proyecto final de la materia API de la universidad UADE, dictado en 2023 en Buenos Aires Argentina.
 
-## Comenzando ðŸš€
+## Comenzando 🚀
 
 _Estas instrucciones te permitirÃ¡n obtener una copia del proyecto en funcionamiento en tu mÃ¡quina local para propÃ³sitos de desarrollo y pruebas._
 
@@ -14,16 +14,16 @@ git clone https://github.com/NicolasMango/tpo-api-backend.git
 
 
 
-### Pre-requisitos ðŸ“‹
+### Pre-requisitos 📋
 
-_QuÃ© cosas necesitas para instalar el software y cÃ³mo instalarlas_
+_Qué cosas necesitas para instalar el software y cómo instalarlas_
 
 ```
 Mongo versiÃ³n 3.4.10 o superior
 Node versiÃ³n 18.16.0 o superior
 ```
 
-### InstalaciÃ³n ðŸ”§
+### Instalación 🔧
 
 _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
@@ -55,7 +55,7 @@ npm start
 #Y todo listo!! Ya puedes ejecutar el programa en tu mÃ¡quina local
 
 
-## Construido con ðŸ› ï¸
+## Construido con 🛠️
 
 _Las herramientas utilizadas para crear el proyecto son:_
 
@@ -68,6 +68,6 @@ _Las herramientas utilizadas para crear el proyecto son:_
 * [Mongoose](https://www.npmjs.com/package/mongoose) - Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 * [MailJet](https://github.com/mailjet/mailjet-apiv3-nodejs) - Mailjet NodeJs Wrapper.
 
-## Autor âœ’ï¸
+## Autor ✒️
 
 * **Nicolas Mango** - *DiseÃ±o, programaciÃ³n, pruebas y documentaciÃ³n* - [NicolasMango](https://github.com/NicolasMango/)
