@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# TPO API - Nicolas Mango
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este es el proyecto final de la materia API de la universidad UADE, dictado en 2023 en Buenos Aires Argentina.
 
-## Available Scripts
+## Comenzando ðŸš€
 
-In the project directory, you can run:
+_Estas instrucciones te permitirÃ¡n obtener una copia del proyecto en funcionamiento en tu mÃ¡quina local para propÃ³sitos de desarrollo y pruebas._
 
-### `npm start`
+Ejecutar el siguiente comando:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+git clone https://github.com/NicolasMango/tpo-api-backend.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pre-requisitos ðŸ“‹
 
-### `npm run build`
+_QuÃ© cosas necesitas para instalar el software y cÃ³mo instalarlas_
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+Mongo versiÃ³n 3.4.10 o superior
+Node versiÃ³n 18.16.0 o superior
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### InstalaciÃ³n ðŸ”§
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-### `npm run eject`
+Verificar que en el archivo .env estÃ© definido lo siguiente. Caso contrario definirlo.
+```
+PORT = 8080
+CONNECTION_STRING = mongodb+srv://nicolasmango:proyectouade@clusternmango.x1aj9xc.mongodb.net/
+SALT =  $2b$10$PXKmPlQNG/LGEqJYXdX/Qu
+PRIVATE_KEY = $2b$10$PXKmPlQNG/LGEqJYXdX/Qu
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Ejecutar desde una terminal:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+cd tpo-api-backend
+cd backend
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Desde otra terminal:
+```
+cd tpo-api-backend
+cd frontend
+npm install
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#Y todo listo!! Ya puedes ejecutar el programa en tu mÃ¡quina local
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Construido con ðŸ› ï¸
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+_Las herramientas utilizadas para crear el proyecto son:_
 
-### Code Splitting
+* [React](https://es.react.dev/learn) - React lets you build user interfaces out of individual pieces called components
+* [Material UI](https://mui.com) - Material UI is an open-source React component library that implements Google's Material Design.
+* [Express](https://www.npmjs.com/package/express) - Fast, unopinionated, minimalist web framework for node.
+* [Bcrypt](https://www.npmjs.com/package/bcrypt) - A library to help you hash passwords.
+* [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - An implementation of JSON Web Tokens..
+* [CORS](https://www.npmjs.com/package/cors) - CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+* [Mongoose](https://www.npmjs.com/package/mongoose) - Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
+* [MailJet](https://github.com/mailjet/mailjet-apiv3-nodejs) - Mailjet NodeJs Wrapper.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Autor âœ’ï¸
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* **Nicolas Mango** - *DiseÃ±o, programaciÃ³n, pruebas y documentaciÃ³n* - [NicolasMango](https://github.com/NicolasMango/)
