@@ -4,7 +4,7 @@ Este es el proyecto final de la materia API de la universidad UADE, dictado en 2
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirÃ¡n obtener una copia del proyecto en funcionamiento en tu mÃ¡quina local para propÃ³sitos de desarrollo y pruebas._
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
 Ejecutar el siguiente comando:
 
@@ -19,15 +19,15 @@ git clone https://github.com/NicolasMango/tpo-api-backend.git
 _Qué cosas necesitas para instalar el software y cómo instalarlas_
 
 ```
-Mongo versiÃ³n 3.4.10 o superior
-Node versiÃ³n 18.16.0 o superior
+Mongo versión 3.4.10 o superior
+Node versión 18.16.0 o superior
 ```
 
 ### Instalación 🔧
 
 _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-Verificar que en el archivo .env estÃ© definido lo siguiente. Caso contrario definirlo.
+Verificar que en el archivo .env esta definido lo siguiente. Caso contrario definirlo.
 ```
 PORT = 8080
 CONNECTION_STRING = mongodb+srv://nicolasmango:proyectouade@clusternmango.x1aj9xc.mongodb.net/
@@ -52,7 +52,7 @@ npm install
 npm start
 ```
 
-#Y todo listo!! Ya puedes ejecutar el programa en tu mÃ¡quina local
+#Y todo listo!! Ya puedes ejecutar el programa en tu máquina local
 
 
 ## Construido con 🛠️
@@ -70,4 +70,4 @@ _Las herramientas utilizadas para crear el proyecto son:_
 
 ## Autor ✒️
 
-* **Nicolas Mango** - *DiseÃ±o, programaciÃ³n, pruebas y documentaciÃ³n* - [NicolasMango](https://github.com/NicolasMango/)
+* **Nicolas Mango** - *Diseño, programación, pruebas y documentación* - [NicolasMango](https://github.com/NicolasMango/)
